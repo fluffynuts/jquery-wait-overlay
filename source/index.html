@@ -1,0 +1,57 @@
+<html>
+    <head>
+        <script src="node_modules/jquery/dist/jquery.js"></script>
+        <script src="jquery.wait-overlay.js"></script>
+        <link rel="stylesheet" href="jquery.wait-overlay.css" type="text/css" />
+        <style>
+            /* styles for this demo page only
+                -- look in jquery.wait-overlay.css for stuff specific to the plugin */
+            div.waitable {
+                height: 200px;
+                width: 85%;
+                border: 1px solid #aaa;
+                border-radius: 5px;
+                background: #eee;
+                color: #000;
+                text-align: center;
+                margin: auto;
+            }
+            body {
+                background: #fff;
+                color: #000;
+            }
+            p {
+                text-align: center;
+            }
+        </style>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                var waiting = false;
+                $('#demo').on('click', function() {
+                    if (waiting) {
+                        $('div.waitable').unwait();
+                        $(this).text('Wait');
+                        waiting = false;
+                    } else {
+                        $('div.waitable').wait();
+                        $(this).text('Unwait');
+                        waiting = true;
+                    }
+                });
+                $('#wait-button').on('click', function() {
+                    alert('You clicked the button in the waitable area');
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <p>
+            <button id="demo">Wait</button>
+        </p>
+        <div class="waitable">
+            <p>
+            Some content would go in here.
+            </p>
+            <button id="wait-button">You can only click this when not waiting</button>
+        </div>
+    </body>
